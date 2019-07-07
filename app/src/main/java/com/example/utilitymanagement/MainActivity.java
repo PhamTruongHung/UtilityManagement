@@ -7,14 +7,20 @@ import com.example.utilitymanagement.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,9 +34,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = firebaseDatabase.getReference("message");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +97,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_login) {
-            databaseReference.push().setValue("Hello, World!");
             Toast.makeText(this, "Click login!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.nav_cloud) {
-
+            Toast.makeText(this, "Click cloud data!!!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, cloudData.class));
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {
