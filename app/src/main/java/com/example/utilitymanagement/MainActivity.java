@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
             databaseReference.push().setValue("Hello, World!");
             Toast.makeText(this, "Click login!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_cloud) {
 
         } else if (id == R.id.nav_slideshow) {
 
