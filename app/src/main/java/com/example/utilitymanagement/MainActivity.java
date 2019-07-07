@@ -103,7 +103,8 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Click cloud data!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, cloudData.class));
         } else if (id == R.id.nav_slideshow) {
-
+            Toast.makeText(this, "Click CloudDataWithTab!!!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, CloudDataWithTab.class));
         } else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.nav_share) {
