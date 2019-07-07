@@ -22,7 +22,7 @@ public class cloudData extends AppCompatActivity {
 
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = firebaseDatabase.getReference("message");
+    DatabaseReference databaseReference = firebaseDatabase.getReference("Hourly check/2019-07-07/ZT55");
 
     HourlyCheckType hourlyCheckTypeTmp = new HourlyCheckType("10:00:00", "Hung");
 
@@ -42,12 +42,12 @@ public class cloudData extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, hourlyCheckArray);
         hourlyCheckListView.setAdapter(arrayAdapter);
 
-        databaseReference.push().setValue(hourlyCheckTypeTmp);
+        //databaseReference.push().setValue(hourlyCheckTypeTmp);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 HourlyCheckType hourlyCheckType_2 = dataSnapshot.getValue(HourlyCheckType.class);
-                hourlyCheckArray.add(hourlyCheckType_2.getPersonCheck() + " - " + hourlyCheckType_2.getTimeCheck());
+                hourlyCheckArray.add(hourlyCheckType_2.getTimeCheck() + " - " + hourlyCheckType_2.getPersonCheck());
                 arrayAdapter.notifyDataSetChanged();
                 Log.d("Check", hourlyCheckType_2.getTimeCheck());
             }
