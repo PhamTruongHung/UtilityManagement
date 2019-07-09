@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
+        arrayListDate.add(simpleDateFormat_date.format(currentDate));
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
 
