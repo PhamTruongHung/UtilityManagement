@@ -71,11 +71,22 @@ public class MainActivity extends AppCompatActivity
         spinnerMachine = (Spinner) findViewById(R.id.spinnerMachine);
 
         ArrayList<String> arrayListMachine = new ArrayList<>();
-        arrayListMachine.add("ZT55");
+        arrayListMachine.add("GLYCOL");
+        arrayListMachine.add("CHILLER");
+        arrayListMachine.add("BCA");
+        arrayListMachine.add("COOLING TOWER");
+        arrayListMachine.add("IVAR");
         arrayListMachine.add("MIURA 1");
         arrayListMachine.add("MIURA 2");
         arrayListMachine.add("MIURA 3");
-        arrayListMachine.add("IVAR");
+        arrayListMachine.add("CE2");
+        arrayListMachine.add("CE680");
+        arrayListMachine.add("CE46");
+        arrayListMachine.add("ZT22");
+        arrayListMachine.add("ZT37");
+        arrayListMachine.add("ZT55");
+        arrayListMachine.add("IR132K");
+        arrayListMachine.add("CO2 Evaporator");
 
         ArrayAdapter arrayAdapterMachine = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListMachine);
         spinnerMachine.setAdapter(arrayAdapterMachine);
