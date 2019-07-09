@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -42,12 +43,21 @@ public class cloudData extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, hourlyCheckArray);
         hourlyCheckListView.setAdapter(arrayAdapter);
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("Data");
+
+        final String machine = bundle.getString("machine");
+        final String dateOfCheck = bundle.getString("dateOfCheck");
+
+        Toast.makeText(this, machine + " " + dateOfCheck, Toast.LENGTH_SHORT).show();
+
+        databaseReference = firebaseDatabase.getReference("Hourly check/" + dateOfCheck + "/" + machine);
         //databaseReference.push().setValue(hourlyCheckTypeTmp);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 HourlyCheckType hourlyCheckType_2 = dataSnapshot.getValue(HourlyCheckType.class);
-                hourlyCheckArray.add(hourlyCheckType_2.getTimeCheck() + " - " + hourlyCheckType_2.getPersonCheck());
+                hourlyCheckArray.add(dateOfCheck + " - " + machine + " - " + hourlyCheckType_2.getTimeCheck() + " - " + hourlyCheckType_2.getPersonCheck());
                 arrayAdapter.notifyDataSetChanged();
                 Log.d("Check", hourlyCheckType_2.getTimeCheck());
             }

@@ -30,10 +30,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Spinner spinnerMachine;
+    Spinner spinnerDate;
+    final String[] currentTime = new String[3];
+    final SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +52,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,6 +67,25 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        spinnerMachine = (Spinner) findViewById(R.id.spinnerMachine);
+
+        ArrayList<String> arrayListMachine = new ArrayList<>();
+        arrayListMachine.add("ZT55");
+        arrayListMachine.add("MIURA 1");
+        arrayListMachine.add("MIURA 2");
+        arrayListMachine.add("MIURA 3");
+        arrayListMachine.add("IVAR");
+
+        ArrayAdapter arrayAdapterMachine = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListMachine);
+        spinnerMachine.setAdapter(arrayAdapterMachine);
+
+        spinnerDate = (Spinner) findViewById(R.id.spinnerDate);
+
+        ArrayList<String> arrayListDate = new ArrayList<>();
+        arrayListDate.add(simpleDateFormat_date.format(Calendar.getInstance().getTime()));
+        ArrayAdapter arrayAdapterDate = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListDate);
+        spinnerDate.setAdapter(arrayAdapterDate);
     }
 
     @Override
@@ -100,8 +130,14 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Click login!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.nav_cloud) {
+            Intent intent = new Intent(this, cloudData.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("machine", spinnerMachine.getSelectedItem().toString());
+            bundle.putString("dateOfCheck", spinnerDate.getSelectedItem().toString());
+
+            intent.putExtra("Data", bundle);
             Toast.makeText(this, "Click cloud data!!!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, cloudData.class));
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
             Toast.makeText(this, "Click CloudDataWithTab!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, CloudDataWithTab.class));
