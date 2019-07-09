@@ -34,9 +34,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Machine selection
         spinnerMachine = (Spinner) findViewById(R.id.spinnerMachine);
 
         ArrayList<String> arrayListMachine = new ArrayList<>();
@@ -91,12 +94,34 @@ public class MainActivity extends AppCompatActivity
         ArrayAdapter arrayAdapterMachine = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListMachine);
         spinnerMachine.setAdapter(arrayAdapterMachine);
 
+
+        //date selection
         spinnerDate = (Spinner) findViewById(R.id.spinnerDate);
 
         ArrayList<String> arrayListDate = new ArrayList<>();
-        arrayListDate.add(simpleDateFormat_date.format(Calendar.getInstance().getTime()));
+
+        Date currentDate = null;
+        try {
+            currentDate = simpleDateFormat_date.parse(simpleDateFormat_date.format(Calendar.getInstance().getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+
+        for (int i = 0; i<7;i++){
+            calendar.add(Calendar.DAY_OF_YEAR, -1);
+            Date newDate = calendar.getTime();
+            String date = simpleDateFormat_date.format(newDate);
+            Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
+            arrayListDate.add(date);
+        }
+
         ArrayAdapter arrayAdapterDate = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListDate);
         spinnerDate.setAdapter(arrayAdapterDate);
+
+
     }
 
     @Override

@@ -1,15 +1,15 @@
 package com.example.utilitymanagement;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +37,7 @@ public class cloudData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cloud_data);
 
-        hourlyCheckListView = (ListView) findViewById(R.id.hourlyCheckListView);
+        hourlyCheckListView = findViewById(R.id.hourlyCheckListView);
         hourlyCheckArray = new ArrayList<String>();
 
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, hourlyCheckArray);
